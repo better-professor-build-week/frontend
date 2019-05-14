@@ -1,0 +1,21 @@
+.Studentslist {
+
+
+}
+.String {
+    display: flex;
+    flex-direction: row;
+}
+.Data {
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.Projects {
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    font-weight: normal;
+}

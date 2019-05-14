@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import './StudentForm.css';
 
 
 class StudentForm extends Component {
@@ -38,21 +38,21 @@ class StudentForm extends Component {
     return (
       <div className="StudentForm">
         <form onSubmit={this.addStudent}>
-          <input
+          <input className="Input"
             onChange={this.handleInputChange}
             placeholder="First name"
             value={this.state.firstname}
             name="firstname"
             type='text'
           />
-          <input
+          <input className="Input"
             onChange={this.handleInputChange}
             placeholder="Last name"
             value={this.state.lastname}
             name="lastname"
             type='text'
           />
-          <input
+          <input  className="Input"
             onChange={this.handleInputChange}
             placeholder="email"
             value={this.state.email}

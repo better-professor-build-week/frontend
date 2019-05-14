@@ -5,14 +5,15 @@ import StudentsList from './StudentsList';
 //import Movie from './Movies/Movie';
 import { Route, Link } from 'react-router-dom';
 import StudentListData from  './studentlist.json';
-
+import './App.css'
 
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: []
+      students: [], 
+      selected: []
     };
   }
   
@@ -38,14 +39,27 @@ export default class App extends Component {
     students.push({...student, id: new Date, projects: []});
     this.setState({ students });
   }
-
+  setSelected = (studentId, selected) => {
+    console.log(selected)
+    if (selected) {
+    const selectedStudents =  this.state.selected.concat (studentId);
+    this.setState ({selected: selectedStudents});
+    }
+  }
   render() {
     return (
-      <div>
+      <div className="main">
+      <h1>List of my students</h1>
         {/* <SavedList list={this.state.savedList} /> */}
         <Route
       exact path='/'
-      render={(props) => <StudentsList {...props} data={this.state.students} postStudent={this.postStudent}/>
+      render={(props) => <StudentsList {...props} 
+      data={this.state.students} 
+      postStudent={this.postStudent}
+      selectedStudents={this.state.selected}
+      setSelected={this.setSelected}
+      />
+
       }
 />
         {/* <Route exact path="/" component={MovieList} />
