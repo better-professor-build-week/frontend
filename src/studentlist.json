@@ -1,0 +1,54 @@
+[
+  {
+    "student_id": 8,
+    "firstname": "Jillian",
+    "lastname": "Hartmann",
+    "email": "Imelda_Mann47@gmail.com",
+    "projects": [
+      {
+        "project_id": 4,
+        "project_name": "Sun Rise/set Time Finder",
+        "project_deadline": "2019-04-18T12:00:00.000Z",
+        "feedback_deadline": "2019-04-20T12:00:00.000Z",
+        "recommendation_deadline": "2019-05-01T12:00:00.000Z",
+        "studentMessage": "You can't calculate the monitor without programming the cross-platform SAS capacitor!",
+        "professorMessage": "The SSL microchip is down, index the solid state bus so we can copy the XSS firewall!"
+      },
+      {
+        "project_id": 1,
+        "project_name": "Static Code Checker",
+        "project_deadline": "2019-05-08T12:00:00.000Z",
+        "feedback_deadline": "2019-05-10T12:00:00.000Z",
+        "recommendation_deadline": "2019-06-01T12:00:00.000Z",
+        "studentMessage": "You can't back up the interface without programming the online HTTP application!",
+        "professorMessage": ""
+      }
+    ]
+  },
+  {
+    "student_id": 0,
+    "firstname": "Peter",
+    "lastname": "Pen",
+    "email": "Imelda_Mann47@gmail.com",
+    "projects": [
+      {
+        "project_id": 0,
+        "project_name": "Sun Rise/set Time Finder",
+        "project_deadline": "2019-04-18T12:00:00.000Z",
+        "feedback_deadline": "2019-04-20T12:00:00.000Z",
+        "recommendation_deadline": "2019-05-01T12:00:00.000Z",
+        "studentMessage": "You can't calculate the monitor without programming the cross-platform SAS capacitor!",
+        "professorMessage": "The SSL microchip is down, index the solid state bus so we can copy the XSS firewall!"
+      },
+      {
+        "project_id": 2,
+        "project_name": "Static Code Checker",
+        "project_deadline": "2019-05-08T12:00:00.000Z",
+        "feedback_deadline": "2019-05-10T12:00:00.000Z",
+        "recommendation_deadline": "2019-06-01T12:00:00.000Z",
+        "studentMessage": "You can't back up the interface without programming the online HTTP application!",
+        "professorMessage": ""
+      }
+    ]
+  }
+]
