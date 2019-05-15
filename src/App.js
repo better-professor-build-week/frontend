@@ -45,7 +45,25 @@ export default class App extends Component {
     const selectedStudents =  this.state.selected.concat (studentId);
     this.setState ({selected: selectedStudents});
     }
+    else {const comparedStudents = this.state.selected.filter(x => x != studentId);
+    this.setState ({selected: comparedStudents});
   }
+}
+  studentDeleted = () => {
+    this.setState ((state) =>{
+      const newTodoList = state.toDoList.filter((item) => {
+        if (item.completed == true)
+          return false;
+        return true;
+      });
+
+      return ( {
+        toDoList: newTodoList
+      } )
+
+    })
+  }
+
   render() {
     return (
       <div className="main">

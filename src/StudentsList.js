@@ -7,6 +7,7 @@ export default class StudentsList extends Component {
   render() {
     return (
       <div className="Studentslist">
+      <ToolBar selected={this.props.selectedStudents}/>
        <StudentForm postStudent={this.props.postStudent} 
        />
         {this.props.data.map(student => (    
@@ -19,12 +20,21 @@ export default class StudentsList extends Component {
     );
   }
 }
+class ToolBar extends Component {
+  render ()
+  { return (
+    <div>
+    {this.props.selected.length > 0 ? <div><button>Delete</button> </div> : <div></div>}
+    </div>
+  )
+  }
 
+}
 class StudentDetails extends Component {
 
   handleInputChange = e => 
   {
-    this.props.setSelected(this.props.student.student_id, e.target.value)
+    this.props.setSelected(this.props.student.student_id, e.target.checked)
 };
  
 
