@@ -51,14 +51,17 @@ export default class App extends Component {
 }
   studentDeleted = () => {
     this.setState ((state) =>{
-      const newTodoList = state.toDoList.filter((item) => {
-        if (item.completed == true)
+      const listOfSaved = state.students.filter((student) => {
+        if (state.selected.indexOf(student.student_id) != -1)
           return false;
         return true;
       });
 
+  
+
       return ( {
-        toDoList: newTodoList
+        students: listOfSaved,
+        selected: []
       } )
 
     })
@@ -76,6 +79,7 @@ export default class App extends Component {
       postStudent={this.postStudent}
       selectedStudents={this.state.selected}
       setSelected={this.setSelected}
+      deleted={this.studentDeleted}
       />
 
       }

@@ -7,7 +7,7 @@ export default class StudentsList extends Component {
   render() {
     return (
       <div className="Studentslist">
-      <ToolBar selected={this.props.selectedStudents}/>
+      <ToolBar selected={this.props.selectedStudents} deleteAction={this.props.deleted}/>
        <StudentForm postStudent={this.props.postStudent} 
        />
         {this.props.data.map(student => (    
@@ -24,7 +24,7 @@ class ToolBar extends Component {
   render ()
   { return (
     <div>
-    {this.props.selected.length > 0 ? <div><button>Delete</button> </div> : <div></div>}
+    {this.props.selected.length > 0 ? <div><button onClick={this.props.deleteAction}>Delete</button> </div> : <div></div>}
     </div>
   )
   }
