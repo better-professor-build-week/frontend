@@ -14,7 +14,7 @@ export default class StudentsList extends Component {
        <StudentForm postStudent={this.props.postStudent} 
        />
         {this.props.data.map(student => (    
-            <StudentDetails key={student.student_id} 
+            <StudentRou key={student.student_id} 
             student={student} 
             setSelected={this.props.setSelected}
             selected={this.props.selectedStudents.indexOf(student.student_id) != -1}/>
@@ -33,7 +33,7 @@ class ToolBar extends Component {
   }
 
 }
-class StudentDetails extends Component {
+class StudentRou extends Component {
 
   handleInputChange = e => 
   {

@@ -69,7 +69,8 @@ export default class App extends Component {
   }
   getStudent = (id) => {
    const singleStudent = this.state.students.filter (student => student.student_id == id) 
-      return singleStudent[0];
+      console.log(singleStudent);
+   return singleStudent[0];
   }
   render() {
     return (
@@ -84,7 +85,7 @@ export default class App extends Component {
                 />}
          />
 
-       <Route path= '/student/:id' render={({id}) => <StudentsDetails student={this.getStudent(id)}/> }
+       <Route path= '/student/:id' render={({match}) => <StudentsDetails student={this.getStudent(match.params.id)}/> }
         />
       </div>
     );
