@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import StudentForm from './StudentForm';
 import './StudentsList.css';
 
+
+
 export default class StudentsList extends Component {
   render() {
     return (
       <div className="Studentslist">
+         <h1>List of my students</h1>
       <ToolBar selected={this.props.selectedStudents} deleteAction={this.props.deleted}/>
        <StudentForm postStudent={this.props.postStudent} 
        />
@@ -46,7 +49,7 @@ class StudentDetails extends Component {
       <input type="checkbox" value = {selected}
        onChange={this.handleInputChange}></input> 
         <div className="Data">
-        <Link to={`/students/${student.student_id}`}>
+        <Link to={`/student/${student.student_id}`}>
      <em>{firstname}</em> <em>{lastname}</em>
      </Link>
       </div>
@@ -54,14 +57,10 @@ class StudentDetails extends Component {
       <div className="Data">
         E-mail: <em>{email}</em>
         </div>
-         <Link to={`/students/${student.id}`}>
+         <Link to={`/student/${student.student_id}`}>
       <span className="Projects"> Projects </span>
       </Link>
-      {/* {projects.map(project => (
-        <div key={project.project_id}>
-          {project.project_name}
-        </div>
-      ))} */}
+      
     </div>
   );
 }

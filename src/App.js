@@ -6,6 +6,7 @@ import StudentsList from './StudentsList';
 import { Route, Link } from 'react-router-dom';
 import StudentListData from  './studentlist.json';
 import './App.css'
+import StudentsDetails from './StudentsDetails';
 
 
 export default class App extends Component {
@@ -66,27 +67,25 @@ export default class App extends Component {
 
     })
   }
-
+  getStudent = (id) => {
+   const singleStudent = this.state.students.filter (student => student.student_id == id) 
+      return singleStudent[0];
+  }
   render() {
     return (
       <div className="main">
-      <h1>List of my students</h1>
         {/* <SavedList list={this.state.savedList} /> */}
-        <Route
-      exact path='/'
-      render={(props) => <StudentsList {...props} 
-      data={this.state.students} 
-      postStudent={this.postStudent}
-      selectedStudents={this.state.selected}
-      setSelected={this.setSelected}
-      deleted={this.studentDeleted}
-      />
+        <Route  exact path='/' render={(props) => <StudentsList {...props} 
+                data={this.state.students} 
+                postStudent={this.postStudent}
+                selectedStudents={this.state.selected}
+                setSelected={this.setSelected}
+                deleted={this.studentDeleted}
+                />}
+         />
 
-      }
-/>
-        {/* <Route exact path="/" component={MovieList} />
-        <Route path="/movies/:id" component={Movie} /> */}
-
+       <Route path= '/student/:id' render={({id}) => <StudentsDetails student={this.getStudent(id)}/> }
+        />
       </div>
     );
   }
