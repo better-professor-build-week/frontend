@@ -7,7 +7,11 @@ import { Route, Link } from 'react-router-dom';
 import StudentListData from  './studentlist.json';
 import './App.css'
 import StudentsDetails from './StudentsDetails';
+import Login from './Login';
 
+
+const apiRoot = 'https://betterprofessor.herokuapp.com/api';
+  
 
 export default class App extends Component {
   constructor(props) {
@@ -17,7 +21,8 @@ export default class App extends Component {
       selected: []
     };
   }
-  
+
+
       componentDidMount() {
      // axios
        // .get('http://localhost:5000/api/movies')
@@ -76,6 +81,8 @@ export default class App extends Component {
     return (
       <div className="main">
         {/* <SavedList list={this.state.savedList} /> */}
+        <Route exact path="/login" component={Login} />
+        <div className="second">
         <Route  exact path='/' render={(props) => <StudentsList {...props} 
                 data={this.state.students} 
                 postStudent={this.postStudent}
@@ -87,6 +94,7 @@ export default class App extends Component {
 
        <Route path= '/student/:id' render={({match}) => <StudentsDetails student={this.getStudent(match.params.id)}/> }
         />
+        </div>
       </div>
     );
   }
