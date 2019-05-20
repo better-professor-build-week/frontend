@@ -15,7 +15,7 @@
     padding: 0.8rem;
 }
 
-.card > form{
+.card > .form{
     display: flex;
     flex-direction: column;
 }

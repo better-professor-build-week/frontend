@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './Login.css';
 import Auth from './AuthService';
-import { Route, Link,withRouter } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
-
-class Login extends Component {
+class Signup extends Component {
     constructor(){
         super();
         
@@ -17,7 +16,7 @@ class Login extends Component {
         return (
             <div className="center">
                 <div className="card">
-                    <h1>Login</h1>
+                    <h1>Sign up</h1>
                         <div className="form">
                         <input
                             className="form-item"
@@ -36,12 +35,11 @@ class Login extends Component {
                         <button
                             className="form-submit"
                             onClick = {this.handleFormSubmit}>
-                            Login
+                            Sign Up
                        </button>
-                       
-                       <p><span>If you don't have an account, </span>
-                       <Link to={`/signup`}>
-                       <span>sign up here</span>
+                       <p> <span>If you already have an account, </span>
+                       <Link to={`/login`}>
+                       <span>login here</span>
                         </Link>
                        </p>
                        </div>
@@ -63,9 +61,8 @@ class Login extends Component {
     {
         e.preventDefault();
       
-        Auth.login(this.state.username,this.state.password)
-            .then(res =>{
-                this.props.history.push("/");
+        Auth.signup(this.state.username,this.state.password)
+            .then(res =>{alert(res)
             })
             .catch(err =>{
                 alert(err);
@@ -73,4 +70,4 @@ class Login extends Component {
     }
 }
 
-export default  withRouter (Login);
+export default Signup;

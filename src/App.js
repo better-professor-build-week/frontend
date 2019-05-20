@@ -8,6 +8,8 @@ import StudentListData from  './studentlist.json';
 import './App.css'
 import StudentsDetails from './StudentsDetails';
 import Login from './Login';
+import PrivateRoute from './PrivateRoute';
+import Signup from './Signup';
 
 
 const apiRoot = 'https://betterprofessor.herokuapp.com/api';
@@ -82,8 +84,9 @@ export default class App extends Component {
       <div className="main">
         {/* <SavedList list={this.state.savedList} /> */}
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup}/>
         <div className="second">
-        <Route  exact path='/' render={(props) => <StudentsList {...props} 
+        <PrivateRoute  exact path='/' render={(props) => <StudentsList {...props} 
                 data={this.state.students} 
                 postStudent={this.postStudent}
                 selectedStudents={this.state.selected}
@@ -92,7 +95,7 @@ export default class App extends Component {
                 />}
          />
 
-       <Route path= '/student/:id' render={({match}) => <StudentsDetails student={this.getStudent(match.params.id)}/> }
+       <PrivateRoute path= '/student/:id' render={({match}) => <StudentsDetails student={this.getStudent(match.params.id)}/> }
         />
         </div>
       </div>
