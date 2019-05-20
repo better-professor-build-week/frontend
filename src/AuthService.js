@@ -10,7 +10,7 @@ class AuthService {
 
     login(username, password) {
        
-        return this.fetch(`${this.apiRoot}/login`, {
+        return this.fetch(`/login`, {
             method: 'POST',
             body: JSON.stringify({
                 username,
@@ -24,7 +24,7 @@ class AuthService {
 
     signup (username, password) {
        
-        return this.fetch(`${this.apiRoot}/register`, {
+        return this.fetch(`/register`, {
             method: 'POST',
             body: JSON.stringify({
                 username,
@@ -76,10 +76,12 @@ class AuthService {
         }
 
         if (this.loggedIn()) {
-            headers['Authorization'] = 'Bearer ' + this.getToken()
+            // headers['Authorization'] = 'Bearer ' + this.getToken()
+            headers['Authorization'] = this.getToken()
         }
 
-        return fetch(url, {
+
+        return fetch(this.apiRoot + url, {
             headers,
             ...options
         })

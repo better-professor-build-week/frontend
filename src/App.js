@@ -10,6 +10,7 @@ import StudentsDetails from './StudentsDetails';
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import Signup from './Signup';
+import Auth from './AuthService';
 
 
 const apiRoot = 'https://betterprofessor.herokuapp.com/api';
@@ -26,14 +27,16 @@ export default class App extends Component {
 
 
       componentDidMount() {
-     // axios
-       // .get('http://localhost:5000/api/movies')
-        //.then(response => {
-          this.setState(() => ({ students: StudentListData }));
-       // })
-       // .catch(error => {
-        //  console.error('Server Error', error);
-       // });
+          Auth.fetch (`/professor-student-info`, {
+            method: 'GET',
+        })
+          .then(response => {
+            console.log(response);
+          this.setState(() => ({ students: response }));
+       })
+       .catch(error => {
+         console.error('Server Error', error);
+       });
     }
   
 
