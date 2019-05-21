@@ -9,15 +9,16 @@ class Login extends Component {
         super();
         
     }
-    // componentWillMount(){
-    //     if(Auth.loggedIn())
-    //         this.props.history.replace('/');
-    // }
+    componentWillMount(){
+        if(Auth.loggedIn())
+            this.props.history.replace('/');
+    }
     render() {
         return (
             <div className="center">
                 <div className="card">
                     <h1>Login</h1>
+                    <div>{this.props.register ? 'Log in with your new credentials': ' '}</div>
                         <div className="form">
                         <input
                             className="form-item"

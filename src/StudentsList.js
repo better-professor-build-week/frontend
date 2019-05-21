@@ -6,8 +6,12 @@ import './StudentsList.css';
 
 
 export default class StudentsList extends Component {
+  componentDidMount() {
+    this.props.loadStudentsList();
+  }
   render() {
     return (
+      <div className="second">
       <div className="Studentslist">
          <h1>List of my students</h1>
       <ToolBar selected={this.props.selectedStudents} deleteAction={this.props.deleted}/>
@@ -19,6 +23,7 @@ export default class StudentsList extends Component {
             setSelected={this.props.setSelected}
             selected={this.props.selectedStudents.indexOf(student.student_id) != -1}/>
         ))}
+      </div>
       </div>
     );
   }

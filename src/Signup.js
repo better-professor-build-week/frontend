@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css';
 import Auth from './AuthService';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
+
 
 class Signup extends Component {
     constructor(){
@@ -12,6 +13,8 @@ class Signup extends Component {
     //     if(Auth.loggedIn())
     //         this.props.history.replace('/');
     // }
+
+    
     render() {
         return (
             <div className="center">
@@ -62,12 +65,15 @@ class Signup extends Component {
         e.preventDefault();
       
         Auth.signup(this.state.username,this.state.password)
-            .then(res =>{alert(res)
+            .then(res =>{this.props.history.push("/loginaftersignup");
             })
+            
+                
+       
             .catch(err =>{
                 alert(err);
             })
     }
 }
 
-export default Signup;
+export default  withRouter (Signup);
