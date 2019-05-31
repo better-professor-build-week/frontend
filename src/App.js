@@ -92,6 +92,18 @@ class App extends Component {
   }
 }
   studentDeleted = () => {
+  this.state.selected.forEach(studentId => {
+    Auth.fetch (`/students/${studentId}`, {
+      method: 'DELETE',
+  })
+    .then(response => {
+      console.log(response);
+ })
+ .catch(error => {
+   console.error('Server Error', error);
+ }); 
+    });
+
     this.setState ((state) =>{
       const listOfSaved = state.students.filter((student) => {
         if (state.selected.indexOf(student.student_id) != -1)

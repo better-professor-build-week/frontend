@@ -50,6 +50,7 @@ class StudentRou extends Component {
   { const { student, selected } = this.props;
   const { firstname, lastname, email, projects } = student;
   return (
+    <div>
     <div className="String">
       <input type="checkbox" value = {selected}
        onChange={this.handleInputChange}></input> 
@@ -65,6 +66,7 @@ class StudentRou extends Component {
          <Link to={`/students/${student.student_id}`}>
       <span className="Projects"> Projects </span>
       </Link>
+    </div>
     </div>
   );
 }
