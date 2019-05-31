@@ -54,7 +54,7 @@ class StudentRou extends Component {
       <input type="checkbox" value = {selected}
        onChange={this.handleInputChange}></input> 
         <div className="Data">
-        <Link to={`/student/${student.student_id}`}>
+        <Link to={`/students/${student.student_id}`}>
      <em>{firstname}</em> <em>{lastname}</em>
      </Link>
       </div>
@@ -62,10 +62,9 @@ class StudentRou extends Component {
       <div className="Data">
         E-mail: <em>{email}</em>
         </div>
-         <Link to={`/student/${student.student_id}`}>
+         <Link to={`/students/${student.student_id}`}>
       <span className="Projects"> Projects </span>
       </Link>
-      
     </div>
   );
 }

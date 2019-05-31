@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 //import SavedList from './Movies/SavedList';
 import StudentsList from './StudentsList';
 //import Movie from './Movies/Movie';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import StudentListData from  './studentlist.json';
 import './App.css'
 import StudentsDetails from './StudentsDetails';
@@ -17,7 +17,7 @@ import SignOutButton from './SignOutButton';
 const apiRoot = 'https://betterprofessor.herokuapp.com/api';
   
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +39,7 @@ export default class App extends Component {
   // };
 
   loadStudentsList = () =>{
-    Auth.fetch (`/professor-student-info`, {
+    return Auth.fetch (`/professor-student-info`, {
       method: 'GET',
   })
     .then(response => {
@@ -51,11 +51,36 @@ export default class App extends Component {
  }); 
   }
 
-  postStudent = (student) => {
-    const students = this.state.students;
-    students.push({...student, id: new Date, projects: []});
-    this.setState({ students });
+  postStudent = (student) => { 
+    Auth.fetch (`/students`, {
+      method: 'POST',
+      body: JSON.stringify(student)
+  })
+    .then(response => {
+      console.log(response);
+      this.props.history.push(`/students/${response.id}`);
+ })
+ .catch(error => {
+   console.error('Server Error', error);
+ }); 
   }
+
+ 
+    // this.setState( ( state ) => {
+    //   const newStudent = state.students.concat({student: student,
+    //     id:  new Date,
+    //     projects: []
+    //   } );
+
+    //   console.log("newStudent", newStudent);
+    //   return ( {
+    //     student: newStudent;
+    //   } )
+    // } );
+ 
+
+  
+
   setSelected = (studentId, selected) => {
     console.log(selected)
     if (selected) {
@@ -105,9 +130,12 @@ export default class App extends Component {
                 loadStudentsList={this.loadStudentsList}
                 />}
          />
-       <PrivateRoute path= '/student/:id' render={({match}) => <StudentsDetails student={this.getStudent(match.params.id)}/> }
+       <PrivateRoute path= '/students/:id' render={({match}) => 
+       <StudentsDetails student_id={match.params.id}/> }
         />
         </div>
     );
   }
 }
+
+export default  withRouter (App)

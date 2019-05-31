@@ -1,0 +1,12 @@
+.ProjectForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 25px;
+
+}
+
+.Input {
+    display: inline;
+   margin: 0 10px;
+}
