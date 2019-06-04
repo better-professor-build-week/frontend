@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Auth from "./AuthService";
+import SendNewMessage from "./SendNewMessage";
 
 export default class ProjectDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             project: null,
+            students: [],
             messages: []
         };
     }
@@ -23,49 +25,65 @@ export default class ProjectDetails extends Component {
                 console.error("Server Error", error);
             });
 
-        //   Auth.fetch(`/students-projects/${this.props.student_id}`, {
-        //       method: "GET"
-        //   })
-        //       .then(response => {
-        //           console.log(response);
-        //           this.setState(() => ({ projects: response }));
-        //       })
-        //       .catch(error => {
-        //           console.error("Server Error", error);
-        //       });
-        // }
+        Auth.fetch(`/projects/${this.props.project_id}/students`, {
+            method: "GET"
+        })
+            .then(response => {
+                console.log(response);
+                this.setState(() => ({ students: response }));
+                return response;
+            })
+            .catch(error => {
+                console.error("Server Error", error);
+            });
 
-        // postProject = project => {
-        //   console.log("postProject", project);
-        //   Auth.fetch(`/projects`, {
-        //       method: "POST",
-        //       body: JSON.stringify(project)
-        //   })
-        //       .then(response => {
-        //           return Auth.fetch(`/professor-student-info`, {
-        //               method: "POST",
-        //               body: JSON.stringify({
-        //                   student_id: this.props.student_id,
-        //                   project_id: response.id
-        //               })
-        //           });
-        //       })
-        //       .then(response => {
-        //           return Auth.fetch(`/projects/${response.project_id}`, {
-        //               method: "GET"
-        //           });
-        //       })
-        //       .then(response => {
-        //           console.log(response);
-        //           this.setState({
-        //               projects: this.state.projects.concat(response)
-        //           });
-        //       })
-        //       .catch(error => {
-        //           console.error("Server Error", error);
-        //       });
+        Auth.fetch(`/projects/${this.props.project_id}/messages`, {
+            method: "GET"
+        })
+            .then(response => {
+                this.setState(() => ({ messages: response }));
+            })
+            .catch(error => {
+                console.error("Server Error", error);
+            });
     }
 
+    sendMessage = message => {
+        console.log("postMessage", message);
+        Auth.fetch(`/messages`, {
+            method: "POST",
+            body: JSON.stringify(message)
+        })
+            .then(response => {
+                return Auth.fetch(`/professor-student-info`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        project_id: this.props.project_id,
+                        message_id: response.id
+                    })
+                });
+            })
+            .then(response => {
+                return Auth.fetch(`/messages/${response.message_id}`, {
+                    method: "GET"
+                });
+            })
+            .then(response => {
+                console.log(response);
+                this.setState({
+                    messages: this.state.messages.concat(response)
+                });
+            })
+            .catch(error => {
+                console.error("Server Error", error);
+            });
+    };
+    getStudent = student_id => {
+        const student = this.state.students.filter(
+            student => student.student_id == student_id
+        )[0];
+        return student;
+    };
     render() {
         const project = this.state.project;
         if (project == null) return null;
@@ -73,6 +91,14 @@ export default class ProjectDetails extends Component {
             <div className="second">
                 <div className="Project">
                     <h3>Project name {project.project_name}</h3>
+                    <p>
+                        Students:{" "}
+                        {this.state.students.map(student => (
+                            <div key={student.id}>
+                                {student.firstname} {student.lastname}
+                            </div>
+                        ))}
+                    </p>
                     <p>Project deadline {project.project_deadline}</p>
                     <p>Feedback dealine: {project.feedback_deadline}</p>
                     <p>
@@ -81,13 +107,20 @@ export default class ProjectDetails extends Component {
                     </p>
                     <p>
                         {this.state.messages.map(message => (
-                            <MessageRow key={message.id} message={message} />
+                            <MessageRow
+                                key={message.id}
+                                message={message}
+                                student={this.getStudent(message.student_id)}
+                            />
                         ))}
                     </p>
                     <Link className="home-button" to="/">
                         Home
                     </Link>
-                    {/* <AddNewProject postProject={this.postProject} /> */}
+                    <SendNewMessage
+                        sendMessage={this.sendMessage}
+                        students={this.state.students}
+                    />
                 </div>
             </div>
         );
@@ -96,14 +129,18 @@ export default class ProjectDetails extends Component {
 
 class MessageRow extends Component {
     render() {
-        const { message, sent_date } = this.state.message;
+        console.log(this.props);
+        const { message, send_date } = this.props.message;
         return (
             <div>
+                <div>
+                    {this.props.student.firstname} {this.props.student.lastname}
+                </div>
                 <div>
                     <em>{message}</em>
                 </div>
                 <div className="Data">
-                    Data: <em>{sent_date}</em>
+                    Data: <em>{send_date}</em>
                 </div>
             </div>
         );
