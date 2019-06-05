@@ -50,29 +50,21 @@ export default class ProjectDetails extends Component {
 
     sendMessage = message => {
         console.log("postMessage", message);
-        Auth.fetch(`/messages`, {
+        Auth.fetch(`/projects/${this.props.project_id}/messages`, {
             method: "POST",
             body: JSON.stringify(message)
         })
+
             .then(response => {
-                return Auth.fetch(`/professor-student-info`, {
-                    method: "POST",
-                    body: JSON.stringify({
-                        project_id: this.props.project_id,
-                        message_id: response.id
-                    })
-                });
+                return Auth.fetch(
+                    `/projects/${this.props.project_id}/messages`,
+                    {
+                        method: "GET"
+                    }
+                );
             })
             .then(response => {
-                return Auth.fetch(`/messages/${response.message_id}`, {
-                    method: "GET"
-                });
-            })
-            .then(response => {
-                console.log(response);
-                this.setState({
-                    messages: this.state.messages.concat(response)
-                });
+                this.setState(() => ({ messages: response }));
             })
             .catch(error => {
                 console.error("Server Error", error);
@@ -91,21 +83,21 @@ export default class ProjectDetails extends Component {
             <div className="second">
                 <div className="Project">
                     <h3>Project name {project.project_name}</h3>
-                    <p>
+                    <div>
                         Students:{" "}
                         {this.state.students.map(student => (
-                            <div key={student.id}>
+                            <div key={student.student_id}>
                                 {student.firstname} {student.lastname}
                             </div>
                         ))}
-                    </p>
+                    </div>
                     <p>Project deadline {project.project_deadline}</p>
                     <p>Feedback dealine: {project.feedback_deadline}</p>
                     <p>
                         Recommendation deadline:{" "}
                         {project.recommendation_deadline}
                     </p>
-                    <p>
+                    <div>
                         {this.state.messages.map(message => (
                             <MessageRow
                                 key={message.id}
@@ -113,7 +105,7 @@ export default class ProjectDetails extends Component {
                                 student={this.getStudent(message.student_id)}
                             />
                         ))}
-                    </p>
+                    </div>
                     <Link className="home-button" to="/">
                         Home
                     </Link>

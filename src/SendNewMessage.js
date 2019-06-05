@@ -16,7 +16,8 @@ class SendNewMessage extends Component {
         event.preventDefault();
         const newMessage = {
             message: this.state.message,
-            send_date: this.state.send_date
+            send_date: this.state.send_date,
+            to: this.state.selected
         };
 
         this.props.sendMessage(newMessage);

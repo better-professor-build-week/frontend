@@ -77,7 +77,7 @@ export default class StudentsDetails extends Component {
                         Student name {student.firstname} {student.lastname}
                     </h3>
                     <p>Email {student.email}</p>
-                    <p>
+                    <div>
                         Projects
                         {(this.state.projects || []).map(project => (
                             <div key={project.id}>
@@ -96,7 +96,7 @@ export default class StudentsDetails extends Component {
                             //  {project.recommendation_deadline} */}
                             </div>
                         ))}
-                    </p>
+                    </div>
                     <Link className="home-button" to="/">
                         Home
                     </Link>
